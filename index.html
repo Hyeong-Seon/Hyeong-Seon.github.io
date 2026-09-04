@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>나형선 — AI 모델 개발 · 데이터 엔지니어링</title>
+<meta name="description" content="비전 모델 학습 데이터를 만들다가 데이터 자체로 옮겨간 엔지니어. 모델 개발 경험과 프로덕션 데이터 파이프라인 운영 경험.">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --ink:#16213A; --ink-2:#4A5568; --paper:#FCFCFA; --line:#D9DEE6;
+  --de:#2E5C8A; --de-soft:#E4EDF6;
+  --ai:#A8721A; --ai-soft:#F6EEDC;
+  --max:72rem;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:16.5px;line-height:1.65;font-weight:400;-webkit-font-smoothing:antialiased}
+a{color:var(--de);text-decoration-thickness:1px;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ai);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(1.1rem,4vw,3rem)}
+h1,h2,h3{font-weight:600;line-height:1.25;margin:0}
+h2{font-size:1.55rem;margin-bottom:.35rem}
+h3{font-size:1.1rem;margin:1.6rem 0 .5rem}
+p{margin:.4rem 0 .9rem;max-width:70ch}
+ul{margin:.3rem 0 .9rem;padding-left:1.2rem;max-width:74ch}
+li{margin-bottom:.35rem}
+.muted{color:var(--ink-2)}
+.small{font-size:.9rem}
+section{padding:3.2rem 0;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+.lead{font-size:1.05rem;max-width:66ch;color:var(--ink-2)}
+
+/* header */
+header{padding:1.2rem 0 .4rem}
+header .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap}
+header nav a{margin-left:1.1rem;font-size:.92rem;color:var(--ink-2);text-decoration:none}
+header nav a:hover{color:var(--ink);text-decoration:underline}
+.name{font-weight:600;font-size:1.05rem}
+
+/* hero */
+.hero{padding:3.5rem 0 3rem}
+.hero h1{font-size:clamp(1.9rem,4.2vw,3.1rem);font-weight:300;letter-spacing:-.01em;max-width:24ch}
+.hero h1 b{font-weight:600}
+.hero .sub{font-size:1.08rem;color:var(--ink-2);max-width:62ch;margin-top:1.1rem}
+.contact{margin-top:1.3rem;font-size:.95rem;color:var(--ink-2)}
+.contact a{margin-right:1.2rem}
+
+/* two-lane timeline */
+.lanes{margin-top:3rem;position:relative}
+.lane{display:grid;grid-template-columns:8.5rem 1fr;align-items:start;gap:0 1rem;padding:1rem 0}
+.lane + .lane{border-top:1px dashed var(--line)}
+.lane .tag{font-weight:600;font-size:.95rem;padding-top:.15rem}
+.lane.ai .tag{color:var(--ai)} .lane.de .tag{color:var(--de)}
+.track{position:relative;padding-left:1.1rem}
+.track::before{content:"";position:absolute;left:0;top:.5rem;bottom:.5rem;width:3px;border-radius:2px}
+.lane.ai .track::before{background:var(--ai)} .lane.de .track::before{background:var(--de)}
+.items{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.7rem 1.4rem}
+.item .when{font-size:.82rem;color:var(--ink-2)}
+.item .what{font-weight:600;font-size:.98rem}
+.item .how{font-size:.9rem;color:var(--ink-2)}
+.pivot{margin:1.1rem 0 0 9.5rem;padding:.9rem 1.1rem;border-left:3px solid var(--ink);background:#fff;max-width:60ch;font-size:.98rem}
+@media (max-width:640px){
+  .lane{grid-template-columns:1fr}
+  .lane .tag{margin-bottom:.4rem}
+  .pivot{margin-left:0}
+}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:.93rem;margin:.6rem 0 1rem}
+th,td{text-align:left;vertical-align:top;padding:.6rem .7rem;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--ink-2);font-size:.86rem;border-bottom:2px solid var(--line)}
+td:first-child{font-weight:600}
+.tw{overflow-x:auto}
+.ai-th th{border-bottom-color:var(--ai)} .de-th th{border-bottom-color:var(--de)}
+
+/* project blocks */
+.proj{display:grid;grid-template-columns:minmax(12rem,17rem) 1fr;gap:.6rem 2rem;padding:1.4rem 0;border-top:1px solid var(--line)}
+.proj:first-of-type{border-top:0}
+.proj .side h3{margin-top:0}
+.proj .side .meta{font-size:.88rem;color:var(--ink-2);margin-top:.25rem}
+.proj .side .stack{font-size:.85rem;color:var(--ink-2);margin-top:.6rem;line-height:1.5}
+.proj .body p:first-child{margin-top:0}
+.kv{display:grid;grid-template-columns:5.5rem 1fr;gap:.3rem 1rem;margin:.5rem 0}
+.kv dt{font-weight:600;font-size:.9rem;color:var(--ink-2)}
+.kv dd{margin:0}
+.kv dd ul{margin:0}
+@media (max-width:760px){.proj{grid-template-columns:1fr}}
+
+/* stat inline */
+.num{font-weight:600}
+.pill{display:inline-block;font-size:.8rem;padding:.05rem .5rem;border-radius:2px;margin:.1rem .25rem .1rem 0;background:var(--de-soft);color:var(--de)}
+.pill.ai{background:var(--ai-soft);color:var(--ai)}
+
+footer{padding:2.5rem 0 3.5rem;border-top:1px solid var(--line);font-size:.9rem;color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="name">나형선</div>
+    <nav aria-label="섹션">
+      <a href="#models">모델 개발</a>
+      <a href="#de">데이터 엔지니어링</a>
+      <a href="#incidents">장애 대응</a>
+      <a href="#stack">기술 스택</a>
+      <a href="#edu">학력 · 수상</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section class="hero">
+  <h1>좋은 모델을 만들려면 좋은 데이터가 먼저라는 걸,<br><b>직접 만들어보고 알았습니다.</b></h1>
+  <p class="sub">학부와 부트캠프에서 객체 탐지, 세그멘테이션, 영상 분류, 임베딩 모델을 학습시켰습니다. 그때마다 데이터 수집과 전처리는 제 몫이었고, 그 일이 모델 튜닝보다 재미있었습니다. 그래서 데이터 엔지니어 인턴을 선택했고, 지금은 결제 데이터 정합성 검증과 프로덕션 파이프라인 운영을 하고 있습니다.</p>
+  <div class="contact">
+    <a href="mailto:skgudtjs1@gmail.com">skgudtjs1@gmail.com</a>
+    <a href="https://github.com/Hyeong-Seon">github.com/Hyeong-Seon</a>
+    <span>010-5583-6885</span>
+  </div>
+
+  <div class="lanes" aria-label="경험 타임라인">
+    <div class="lane ai">
+      <div class="tag">모델 개발</div>
+      <div class="track">
+        <div class="items">
+          <div class="item"><div class="when">2024.07 – 2025.11</div><div class="what">자율주행팀 LiDAR 인식</div><div class="how">포인트클라우드 → 객체 · 경로 생성</div></div>
+          <div class="item"><div class="when">2025.09 – 2026.06</div><div class="what">식단 추천 LLM 에이전트</div><div class="how">DINOv2/v3 임베딩 · 학습 데이터 단독 구축</div></div>
+          <div class="item"><div class="when">2025.12 – 2026.03</div><div class="what">블랙박스 과실비율 산정</div><div class="how">C3D · I3D · VideoMAE 영상 분류</div></div>
+          <div class="item"><div class="when">2023 – 2026 (교과)</div><div class="what">CV · 딥러닝 실습</div><div class="how">YOLO 계열 탐지 · SegNeXt · CIFAR · RNN</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="lane de">
+      <div class="tag">데이터 엔지니어링</div>
+      <div class="track">
+        <div class="items">
+          <div class="item"><div class="when">2026.06 –</div><div class="what">결제 정산 대사 자동화</div><div class="how">3개 서비스 · 8개 결제수단 · 월 단위</div></div>
+          <div class="item"><div class="when">2026.07</div><div class="what">비용 파이프라인 Airflow 이관</div><div class="how">4개 벤더 · 8개 계정 · 운영 배포</div></div>
+          <div class="item"><div class="when">2026.07 –</div><div class="what">파이프라인 운영 · 장애 대응</div><div class="how">유실 · 중복 · 지연 · 9.7억 건 백필</div></div>
+          <div class="item"><div class="when">2026.08</div><div class="what">비용 급증 원인 분석</div><div class="how">Job 병목 5건 진단 · 월 13% 절감</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="pivot">모델 프로젝트에서 정확도가 오른 지점은 하이퍼파라미터보다 프레임 간격, 해상도, 중복 제거 같은 데이터 쪽이었습니다. 그 경험이 아래 레인으로 이어졌습니다.</div>
+  </div>
+</section>
+
+<section id="models">
+  <h2>모델 개발 경험</h2>
+  <p class="lead">과제 유형별로 어떤 모델을 어디에 썼는지 정리했습니다. 수치가 있는 항목은 실제 프로젝트에서 측정한 값입니다.</p>
+  <div class="tw">
+  <table class="ai-th">
+    <thead><tr><th>과제</th><th>모델</th><th>어디서</th><th>내 역할 · 결과</th></tr></thead>
+    <tbody>
+      <tr><td>영상 분류</td><td>C3D, I3D (ResNet3D), VideoMAE</td><td>블랙박스 과실비율 산정 (멋쟁이사자처럼 부트캠프)</td><td>143개 판례 시나리오 기준으로 영상 분류·구조화, 프레임 간격 추출로 학습 데이터 단독 준비. 하이퍼파라미터·손실 함수 비교. <span class="num">C3D Top-1 38.8% → 64.1%</span>, 튜닝 모델 최대 <span class="num">82.4%</span>. React + Flask로 EC2 배포.</td></tr>
+      <tr><td>이미지 임베딩</td><td>DINOv2, DINOv3</td><td>식단 추천 LLM 에이전트 (캡스톤)</td><td>음식 이미지 임베딩 모델 후보를 실제 데이터로 비교해 성능·처리 비용 기준으로 선정. 학습 이미지 수집·중복/손상 제거·규격 통일 파이프라인 단독 구축. <span class="num">72팀 중 2위, 최우수상</span>.</td></tr>
+      <tr><td>객체 탐지</td><td>YOLO 계열 (v3 ~ 최신 버전)</td><td>시각지능학습 · 부트캠프</td><td>버전별 구조 차이와 앵커/앵커프리 방식 비교 실습. 커스텀 데이터셋 라벨링 → 학습 → mAP 평가까지 수행.</td></tr>
+      <tr><td>세그멘테이션</td><td>SegNeXt</td><td>부트캠프</td><td>시맨틱 세그멘테이션 학습·추론, 마스크 후처리.</td></tr>
+      <tr><td>3D 인식</td><td>LiDAR 포인트클라우드 처리 (규칙 기반 + 클러스터링)</td><td>Baqu4 자율주행팀</td><td>거리별 밀도 보정으로 연산 속도 개선. IMU 고장 시 충돌 검사 로직으로 센서 값 검증. 장애물 위치로 중앙 경로(Waypoint) 생성. <span class="num">한국교통안전공단 장려상</span>.</td></tr>
+      <tr><td>이미지 분류 · 시퀀스</td><td>CNN (CIFAR-10/100), RNN 계열</td><td>딥러닝 · 기계학습 · 텐서프로그래밍</td><td>학습 곡선 해석, 정규화·증강 효과 비교, 과적합 진단 실습. 딥러닝 A+, 기계학습 A+.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="small muted">모델 목록은 "써봤다"의 나열이 되기 쉬워서, 결과 수치가 있는 것과 없는 것을 구분해 적었습니다. 위 표의 캡스톤·부트캠프·자율주행은 팀 프로젝트이고, 데이터 준비는 모두 제가 단독으로 담당했습니다.</p>
+</section>
+
+<section id="de">
+  <h2>데이터 엔지니어링</h2>
+  <p class="lead">주식회사 미리디 DX개발그룹 PE팀 DE파트 · 데이터 엔지니어 인턴 · 2026.06 – 재직 중. Databricks(Delta Lake, Unity Catalog), Apache Airflow on Kubernetes, AWS, GCP 환경입니다.</p>
+
+  <article class="proj">
+    <div class="side">
+      <h3>결제 정산 대사 자동화</h3>
+      <div class="meta">2026.06 – 재직 중 · 월 단위 · 단독 수행(선임 리뷰)</div>
+      <div class="stack">Spark SQL · Databricks · Delta Lake · Python · Claude Code · MCP</div>
+    </div>
+    <div class="body">
+      <p>IPO 준비에 따른 IFRS 회계 마트 검증. 세 개 서비스의 결제 데이터를 결제대행사(PG) 정산 자료와 거래 단위로 대조해 누락과 금액 불일치를 찾고 원인을 분류합니다. 카드, 간편결제, 가상계좌, 계좌이체, 해외 PG, 앱 인앱결제 8개 수단마다 거래ID 매칭 방식이 다릅니다.</p>
+      <dl class="kv">
+        <dt>한 일</dt><dd><ul>
+          <li>PG 파일 → 임시 뷰 표준화 → 거래ID·주문 브릿지 조인 → 회계 마트 FULL OUTER JOIN → 불일치 추출. 결제수단별 쿼리를 단일 셀 단위로 표준화해 매월 재실행.</li>
+          <li>결제월과 취소월이 다른 건이 순액 비교에서 금액 불일치로 잡히던 오탐을 주문/취소 상태별 분해로 해결. 다국어 상품명 필터 누락, PG별 날짜 포맷, UTC/KST 기준 차이를 건별로 규명.</li>
+          <li>원인 2차 분류를 LLM 에이전트가 MCP로 Databricks를 직접 조회해 수행하도록 자동화. 근거 없는 결론은 건별 재조회로 걸러내고, 판단 불가 건에는 원시 정보 표를 붙이도록 프롬프트 재설계.</li>
+        </ul></dd>
+        <dt>결과</dt><dd>금액 불일치 오탐 13건 → 6건. 해외 PG 누락 절반 이상 복구. 2026년 1~7월 전 결제수단 재대사 완료, 회계팀 소명자료 정리.</dd>
+        <dt>배운 것</dt><dd>에이전트 출력을 믿었다가 사유가 실제 데이터와 안 맞는 건을 선임 리뷰에서 지적받았습니다. 이후 모든 건을 ID로 직접 조회해 확인하는 것이 원칙이 됐습니다.</dd>
+      </dl>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div class="side">
+      <h3>비용 수집 파이프라인 Airflow 이관</h3>
+      <div class="meta">2026.07 · OpenAI · Bedrock · GCP · Anthropic · 8개 계정 · 단독</div>
+      <div class="stack">Airflow (dag_factory YAML · KubernetesPodOperator) · ArgoCD · DuckDB · Delta Lake · S3 · Secrets Manager</div>
+    </div>
+    <div class="body">
+      <p>벤더별 Databricks Job으로 산재해 있던 AI 비용 수집을 Airflow 단일 스케줄러로 통합했습니다. OpenAI 대시보드는 저장 배치가 매일 실패하고 있었고, '사용량 × 자체 단가표' 계산이 10개월 전에 멈춰 계정별 최대 +85% 과소 · 2배 과대 오차가 있었습니다.</p>
+      <dl class="kv">
+        <dt>한 일</dt><dd><ul>
+          <li>단가표를 고치지 않고 Costs API의 실청구 금액(line_item · project 단위)을 그대로 적재하는 구조로 전환. 단가표와 계산 로직 제거.</li>
+          <li>api-to-json → S3 랜딩 → duckdb-to-delta → S3 external Delta 구조로 4종 통일. 벤더별 차이는 SQL 파라미터로 흡수해 이미지 재빌드 없이 YAML/SQL만으로 배포. p_date 파티션 overwrite로 재실행 멱등성 확보.</li>
+          <li>PR(preview 라벨) → ArgoCD 개발 Airflow 자동 기동 → 테스트 → main 머지 → 운영. 2024.09부터 백필 후 master 이관.</li>
+        </ul></dd>
+        <dt>결과</dt><dd>8개 계정 전부 콘솔 청구액과 0%대 오차(최대 0.11%). 이관 중 Bedrock 6일치 금액 유실을 발견해 복구, 해당 월 비용 22.9% 정정.</dd>
+        <dt>배운 것</dt><dd>제거한 잡이 AI 서비스 필터 역할을 하고 있었다는 걸 이관 후 로우수 불일치로 알았습니다. 이관 전에 기존 잡의 코드를 먼저 읽고 역할을 목록화했어야 했습니다.</dd>
+      </dl>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div class="side">
+      <h3>로그인 세션 파이프라인 이관 · 권한 정비</h3>
+      <div class="meta">2026.07 – 2026.08 · 단독</div>
+      <div class="stack">Airflow · Databricks · Python · Permissions API</div>
+    </div>
+    <div class="body">
+      <dl class="kv">
+        <dt>한 일</dt><dd><ul>
+          <li>Databricks 노트북으로 돌던 로그인 세션 적재를 Airflow KubernetesPodOperator로 이관. 원천 컬럼 추가에 자동 대응하도록 스키마 자동 추론 방식으로 재작성하고 약 9.7억 건을 멱등 윈도우 단위로 백필. 워커 유휴를 메트릭으로 확인해 워커 축소 · 오토스케일링으로 백필 비용 절감.</li>
+          <li>워크스페이스 최상위 권한 상속 제거에 앞서 Permissions API로 노트북·파일·대시보드·쿼리 43,033건에 개별 조회 권한을 사전 부여. 상속 제거 후에도 기존 자료 조회 유지, 신규 객체는 비공개로 시작.</li>
+        </ul></dd>
+      </dl>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div class="side">
+      <h3>비용 급증 원인 분석 · 자원 최적화</h3>
+      <div class="meta">2026.08 · 담당자 5명 협의 · 단독</div>
+      <div class="stack">Databricks System Tables · Spark UI · SQL · AWS Cost Explorer</div>
+    </div>
+    <div class="body">
+      <p>5월 대비 8월 Databricks 비용 약 69%, EC2 비용 약 10배 증가. System Tables로 SQL Warehouse · Jobs · Apps 단위로 분해하자 24시간 상시 구동 Apps 9개와 특정 Job Compute가 증가분의 대부분이었고, EC2는 컴퓨트가 아닌 네트워크 아웃바운드 트래픽이 원인이었습니다.</p>
+      <dl class="kv">
+        <dt>한 일</dt><dd><ul>
+          <li>Job 병목 5건 진단 — 공통 CTE 3회 반복 계산, 20개월치 매일 전체 재생성, 96 vCPU 고정 클러스터 CPU p95 10.6%, Spark 클러스터 59분 가동 중 태스크 시간 1분(드라이버 CPU 99.6% · 워커 17.9%, 드라이버 단일 노드 순차 처리).</li>
+          <li>담당자마다 현황 지표 → 원인 → 수정안(중간 테이블화, 롤링 창 + MERGE, r5d.xlarge 축소 및 손익분기 127%, 외부 이관) → 기대 효과 순으로 개별 전달. 재계산 창 길이처럼 업무를 아는 사람만 답할 수 있는 지점은 결론을 비우고 판단 요청.</li>
+          <li>90일 조회 이력 기준 미사용 대시보드 219건 · Gold 마트 60건 목록화, 거버넌스 시트 작성.</li>
+        </ul></dd>
+        <dt>결과</dt><dd>5건 전부 회신 · 개선 협의. 리소스 정리 및 사양 조정으로 월 약 13% 비용 절감.</dd>
+      </dl>
+    </div>
+  </article>
+</section>
+
+<section id="incidents">
+  <h2>프로덕션 파이프라인 장애 대응</h2>
+  <p class="lead">온콜 로테이션을 맡아 직접 원인을 찾아 해결한 사례입니다. 대부분 잡은 정상 종료된 상태에서 데이터만 어긋나 있었습니다.</p>
+  <div class="tw">
+  <table class="de-th">
+    <thead><tr><th>유형</th><th>증상</th><th>원인</th><th>해결 · 결과</th></tr></thead>
+    <tbody>
+      <tr><td>유실</td><td>Bedrock 비용 6일치 금액이 0. 사용량은 정상</td><td>AWS Marketplace 과금 집계가 며칠 늦게 확정되는 창에서 배치가 빈 값을 수집</td><td>정상일 단가를 모델·계정·유형별로 역산해 누락액 추정 → 6일 재실행. 추정치와 실제 1센트 차이. "사용량 &gt; 0 · 금액 = 0" 알림 설계</td></tr>
+      <tr><td>저장 실패</td><td>OpenAI 비용 배치 매일 실패</td><td>같은 컬럼이 값에 따라 double / bigint로 다르게 추론되어 기존 Delta 스키마와 타입 충돌</td><td>저장 직전 명시 캐스팅. 실패 데이터로 재현 테스트 후 반영</td></tr>
+      <tr><td>중복</td><td>9.7억 건 백필 · 재처리에서 실패 후 재실행 시 중복 위험</td><td>append 방식은 재실행 = 중복</td><td>날짜 윈도우 분할 + 파티션 overwrite. 실패 날짜만 재실행해도 결과 동일</td></tr>
+      <tr><td>지연</td><td>BigQuery → Databricks 일배치 특정일 부분 적재. 잡은 성공</td><td>원천 export 지연으로 배치 시점에 데이터 미존재</td><td>N일 룩백 후 MERGE 재처리 제안. "잡 성공 ≠ 데이터 완결"을 팀에 공유</td></tr>
+      <tr><td>배포 후 장애</td><td>개발 통과 DAG가 운영에서 실패 (2건)</td><td>장기 운영 테이블의 Delta 프로토콜 기능 충돌 · 수동 생성 테이블 컬럼을 DuckDB가 TIMESTAMP로 오추론</td><td>프로토콜 확인 후 재시도 · DESCRIBE로 실제 스키마 확인 후 명시 CAST. 이미지 재빌드 없이 YAML/SQL 수정으로 복구</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section id="stack">
+  <h2>기술 스택</h2>
+  <div class="tw">
+  <table>
+    <tbody>
+      <tr><td>모델 개발</td><td>PyTorch, OpenCV, torchvision · CNN / 3D CNN(C3D, I3D) / Transformer 계열(VideoMAE, DINOv2·v3) · YOLO 계열 탐지, SegNeXt 세그멘테이션 · 학습 데이터 수집·정제·증강 파이프라인 구성</td></tr>
+      <tr><td>데이터 처리</td><td>Spark SQL, Python, Delta Lake, DuckDB · FULL OUTER JOIN 기반 대사, 멱등 적재(replaceWhere / MERGE / 파티션 overwrite), 스키마 추론·캐스팅</td></tr>
+      <tr><td>플랫폼 · 운영</td><td>Databricks(Unity Catalog, System Tables, Jobs, Lakeview), Apache Airflow(dag_factory YAML, KubernetesPodOperator), Kubernetes, ArgoCD, Grafana</td></tr>
+      <tr><td>클라우드</td><td>AWS(S3, EC2, Secrets Manager, Cost Explorer), GCP(BigQuery, Billing Export)</td></tr>
+      <tr><td>AI 도구 · API</td><td>Claude Code, MCP 기반 에이전트 워크플로 설계, OpenAI · Anthropic · Bedrock API 연동</td></tr>
+      <tr><td>웹 · 협업</td><td>React, Flask · Git/GitHub(PR 리뷰, GitOps 배포) · Confluence</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section id="edu">
+  <h2>학력 · 수상 · 자격</h2>
+  <div class="tw">
+  <table>
+    <tbody>
+      <tr><td>학력</td><td>한양대학교 ERICA 인공지능학과 (주전공) · 융합보안학과 (부전공) · 2021.03 – 2027.02 졸업 예정 · 평점 3.97 / 4.5<br><span class="small muted">데이터베이스 A0 · 데이터마이닝 A0 · 기계학습 A+ · 딥러닝 A+ · 컴퓨터네트워크 A+ · 시각지능학습 · 텐서프로그래밍</span></td></tr>
+      <tr><td>수상</td><td>2026.06 소프트웨어대학 캡스톤 디자인 최우수상, 72팀 중 2위 (한양대 ERICA)<br>2025.12 프런티어 장려상, 글로벌 IC-PBL SDG 현장연구 (한양대 ERICA)<br>2025.11 자율주행 구현 부문 장려상 (한국교통안전공단)<br>2025.11 Learning Experience Contest 우수상 (한양대 ERICA)</td></tr>
+      <tr><td>자격</td><td>SQLD (2024.09) · ADsP (2025.09) · OPIc Advanced Low (2025.04)</td></tr>
+      <tr><td>활동</td><td>세영 AI 코딩학원 코딩 강사 (2025.02 – 06) — 중학생 C 프로그래밍, 초등 Scratch<br>해병대 병장 만기제대 (2022.04 – 2023.10)</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    나형선 · <a href="mailto:skgudtjs1@gmail.com">skgudtjs1@gmail.com</a> · <a href="https://github.com/Hyeong-Seon">github.com/Hyeong-Seon</a><br>
+    <span class="small">사내 시스템 식별자, 고객 정보, 인명은 제외하고 작성했습니다.</span>
+  </div>
+</footer>
+
+</body>
+</html>
